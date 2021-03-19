@@ -12,7 +12,7 @@ def start_timer(length: int, unit: str):
     :return: None
     """
     time = calculate_time(length, unit)
-    if time == None:
+    if time is None:
         raise ValueError("Invalid input...try again!")
     sleep(time)
     timer_end_sound()
@@ -25,11 +25,11 @@ def calculate_time(length: int, unit: str) -> int:
     :param unit: str - the unit of time used
     :return: the desired time in seconds
     """
-    if unit == "s" or unit == "S":
+    if unit in ["s", "S"]:
         return length
-    elif unit == "m" or unit == "M":
+    elif unit in ["m", "M"]:
         return length * 60
-    elif unit == "h" or unit == "H":
+    elif unit in ["h", "H"]:
         return length * 3600
     else:
         return None
@@ -50,9 +50,7 @@ def check_valid_duration(arg: str) -> bool:
     :return: True if the input is valid, else False
     """
     pattern = "[0-9]+[smhSMH]{1}"
-    if re.match(pattern, arg) is not None:
-        return True
-    return False
+    return re.match(pattern, arg) is not None
 
 
 def parse_duration(arg: str) -> (int, str):
